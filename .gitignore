@@ -117,3 +117,10 @@ ehthumbs.db
 Icon?
 
 Thumbs.db
+
+#################################
+# Vim and Emacs generated files #
+#################################
+*.swp
+*~
+\#*\#
