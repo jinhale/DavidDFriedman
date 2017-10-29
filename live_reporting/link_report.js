@@ -1,11 +1,12 @@
 var casper = require('casper').create();
-var links;
+var localLinks;
+var liveLinks;
 
 function getLinks() {
-// Scrape the links from top-right nav of the website
-    var links = document.querySelectorAll('a');
+    // Scrape the liveLinks from top-right nav of the website
+    var liveLinks = document.querySelectorAll('a');
 
-    return Array.prototype.map.call(links, function (e) {
+    return Array.prototype.map.call(liveLinks, function (e) {
         return e.getAttribute('href')
     });
 }
@@ -14,12 +15,26 @@ function getLinks() {
 casper.start('http://daviddfriedman.com/');
 
 casper.then(function () {
-    links = this.evaluate(getLinks);
+    liveLinks = this.evaluate(getLinks);
+});
+
+casper.thenOpen('http://localhost:5000/', function () {
+    this.echo("Reviewing localhost");
+});
+
+casper.then(function () {
+    localLinks = this.evaluate(getLinks);
 });
 
 casper.run(function () {
-    for(var i in links) {
-        console.log(links[i]);
+    var missingLinks = liveLinks.filter(function (e, i, a) {
+        return localLinks.some(function (ee, ii, aa) {
+            return ee === e;
+        }) === false;
+    });
+
+    for (var i in missingLinks) {
+        console.log(liveLinks[i]);
     }
 
     casper.done();
