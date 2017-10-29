@@ -34,7 +34,7 @@ casper.run(function () {
     });
 
     for (var i in missingLinks) {
-        console.log(liveLinks[i]);
+        console.log(missingLinks[i]);
     }
 
     casper.done();
