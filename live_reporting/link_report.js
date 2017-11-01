@@ -26,21 +26,11 @@ casper.then(function () {
     localLinks = this.evaluate(getLinks);
 });
 
-function makeRelativeLinks(e, i, a) {
-    e = e.replace(/^(.*)[/]([^/]*)$/, '$2');
-     
-    return e;
-}
-
 casper.run(function () {
-    liveLinks = liveLinks.map(makeRelativeLinks);
-    localLinks = localLinks.map(makeRelativeLinks);
-
     var missingLinks = liveLinks.filter(function (e, i, a) {
-        return localLinks.every(function (ee, ii, aa) {
-            // is every live link missing from local links
-            return ee !== e;
-        });
+        return localLinks.some(function (ee, ii, aa) {
+            return ee === e;
+        }) === false;
     });
 
     for (var i in missingLinks) {
