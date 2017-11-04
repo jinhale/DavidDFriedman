@@ -42,4 +42,4 @@ NOTE: Attempting to run `dotnet test` in the solution directory will attempt to 
 
 # CONTACT
 
-If you need to directly contact the maintainer, please see my github account, jinhale, for details. 
+If you need to directly contact the maintainer, please see the github account, jinhale, for details. 
