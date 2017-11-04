@@ -18,6 +18,28 @@ The project is developed largely on the Windows Subsytem for Linux (WSL). Window
 
 For Emacs csharp-mode and xml-mode are useful additions. Many Emcs modes can be installed from https://melpa.org/#/ following instructions on https://www.emacswiki.org/emacs/MELPA. If you use Windows, take care to occlude 'https' in favor of 'http' because there is limited support for it.
 
+# HOW TO RUN INTEGRATION TESTS
+
+## SERVE THE WEBSITE LOCALLY:
+1. Navigate to the correct directory: `$ cd david_d_friedman`.
+2. Start the .NET Core command-line server `$ dotnet run`.
+3. Optionally verify the server is running by browsing `localhost:5000`.
+
+NOTE: If you have problems first check that you are not in the project or unit testing directory.
+
+## RUN THE TESTS
+1. Navigate to the correct directory.
+1.1. Live reporting: `$ cd live_reporting`.
+2. Run integration tests and reports.
+2.1. Examine the links in a report: `$ casperjs.exe link_report.js` 
+
+# HOW TO RUN UNIT TESTS
+
+1. Navigate to the correct directory: `$ cd david_d_friedman.tests`.
+2. Execute the test: `dotnet test`.
+
+NOTE: Attempting to run `dotnet test` in the solution directory will attempt to run tests for both projects. This will give an error indicating that one project is missing tests, then testing proceeds. 
+
 # CONTACT
 
 If you need to directly contact the maintainer, please see my github account, jinhale, for details. 
