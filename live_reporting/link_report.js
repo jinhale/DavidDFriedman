@@ -19,7 +19,7 @@ casper.then(function () {
 });
 
 casper.thenOpen('http://localhost:5000/', function () {
-    this.echo("Reviewing localhost");
+    this.echo("---- BEGIN REPORT - MISSING LINKS");
 });
 
 casper.then(function () {
@@ -27,8 +27,20 @@ casper.then(function () {
 });
 
 casper.run(function () {
+    var prefixRexEx = /[^/]*[/]/g;
+    
     var missingLinks = liveLinks.filter(function (e, i, a) {
+        e = e.replace(prefixRexEx, '');
+
+        // Filter links to fragment identifiers
+        // of the same page. 
+        if (/^#[a-z]*$/i.test(e)) { return false; }
+        if (/^index.shtml#[a-z]*$/i.test(e)) { return false; }
+
+        // Return unmatched (some === false) links.
         return localLinks.some(function (ee, ii, aa) {
+            ee = ee.replace(prefixRexEx, '');
+
             return ee === e;
         }) === false;
     });
@@ -36,6 +48,8 @@ casper.run(function () {
     for (var i in missingLinks) {
         console.log(missingLinks[i]);
     }
+
+    this.echo('---- END REPORT - MISSING LINKS \n');
 
     casper.done();
 }); 
