@@ -31,7 +31,8 @@ NOTE: If you have problems first check that you are not in the project or unit t
 1. Navigate to the correct directory.
 1.1. Live reporting: `$ cd live_reporting`.
 2. Run integration tests and reports.
-2.1. Examine the links in a report: `$ casperjs.exe link_report.js` 
+2.1. Examine the links in a report: `$ casperjs.exe link_report.js`
+2.2. For non Windows systems, there are [alternative executable commands](http://docs.casperjs.org/en/latest/quickstart.html#a-minimal-scraping-script).
 
 # HOW TO RUN UNIT TESTS
 
