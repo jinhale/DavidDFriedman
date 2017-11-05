@@ -49,7 +49,5 @@ casper.run(function () {
         console.log(missingLinks[i]);
     }
 
-    this.echo('---- END REPORT - MISSING LINKS \n');
-
-    casper.done();
+    this.echo('---- END REPORT - MISSING LINKS \n').exit();
 }); 
