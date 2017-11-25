@@ -106,6 +106,8 @@ TestResults/
 
 *.sqlite
 
+*.db
+
 # OS generated files #
 
 ######################
