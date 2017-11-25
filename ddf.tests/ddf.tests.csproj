@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\david_d_friedman\david_d_friedman.csproj" />
+    <ProjectReference Include="..\ddf\ddf.csproj" />
   </ItemGroup>
 
 </Project>
