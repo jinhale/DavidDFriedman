@@ -1,6 +1,8 @@
 var casper = require('casper').create();
 var localLinks;
 var liveLinks;
+var localAcademicLinks;
+var liveAcademicLinks;
 
 function getLinks() {
     // Scrape the liveLinks from top-right nav of the website
@@ -9,6 +11,26 @@ function getLinks() {
     return Array.prototype.map.call(liveLinks, function (e) {
         return e.getAttribute('href')
     });
+}
+
+function filterMatchedLinks(liveList, localList) {
+    var prefixRexEx = /[^/]*[/]/g;
+    
+    return liveList.filter(function (e, i, a) {
+        e = e.replace(prefixRexEx, '');
+
+        // Filter links to fragment identifiers
+        // of the same page. 
+        if (/^#[a-z]*$/i.test(e)) { return false; }
+        if (/^index.shtml#[a-z]*$/i.test(e)) { return false; }
+
+        // Return unmatched (some === false) links.
+        return localList.some(function (ee, ii, aa) {
+            ee = ee.replace(prefixRexEx, '');
+
+            return ee === e;
+        }) === false;
+    });    
 }
 
 // Opens David D. Friedman homepage
@@ -27,27 +49,17 @@ casper.then(function () {
 });
 
 casper.run(function () {
-    var prefixRexEx = /[^/]*[/]/g;
+    var missingLinks = filterMatchedLinks(liveLinks, localLinks);
     
-    var missingLinks = liveLinks.filter(function (e, i, a) {
-        e = e.replace(prefixRexEx, '');
-
-        // Filter links to fragment identifiers
-        // of the same page. 
-        if (/^#[a-z]*$/i.test(e)) { return false; }
-        if (/^index.shtml#[a-z]*$/i.test(e)) { return false; }
-
-        // Return unmatched (some === false) links.
-        return localLinks.some(function (ee, ii, aa) {
-            ee = ee.replace(prefixRexEx, '');
-
-            return ee === e;
-        }) === false;
-    });
-
     for (var i in missingLinks) {
         console.log(missingLinks[i]);
     }
 
-    this.echo('---- END REPORT - MISSING LINKS \n').exit();
+    this.echo('---- END REPORT - MISSING HOMEPAGE LINKS \n');
+
+    this.echo('---- BEGIN REPORT - MISSING ACADEMIC LINKS');
+
+    
+
+    this.echo('---- END REPORT - MISSING ACADEMIC LINKS \n').exit();
 }); 
