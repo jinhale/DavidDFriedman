@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ddf.Data;
 using ddf.Models;
 using ddf.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace ddf
 {
@@ -26,8 +28,13 @@ namespace ddf
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MvcOptions>(options =>
+                    {
+                        options.Filters.Add(new RequireHttpsAttribute());
+                    }); 
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                                                        options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -52,6 +59,11 @@ namespace ddf
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            var options = new RewriteOptions()
+                .AddRedirectToHttps();
+
+            app.UseRewriter(options);
+            
             app.UseStaticFiles();
 
             app.UseAuthentication();
