@@ -127,3 +127,15 @@ Thumbs.db
 *~
 \#*\#
 \.\#*
+
+################################
+# Private files/folders        #
+################################
+myCertificateAuthority/**
+certificates/**
+*.pfx
+
+######################
+# Visual Studio      #
+######################
+**/.vs/*
