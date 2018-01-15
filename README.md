@@ -35,6 +35,14 @@ If you can run integration tests and unit tests, not just version
 commands, you are all set to run the project. Use your favorite
 Git-based SCM system to contribute uploads.
 
+## SSL
+
+The SSL password must be private and never exposed to the public
+especially via github.  Follow
+[instructions](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio)
+to store the SSL password.  Create your own self-signed certificate as
+your OS allows.  SSL is required. 
+
 ## OPTIONAL DEVELOPMENT SETUP
 
 The project is developed largely on the Windows Subsytem for Linux
