@@ -41,7 +41,15 @@ The SSL password must be private and never exposed to the public
 especially via github.  Follow
 [instructions](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio)
 to store the SSL password.  Create your own self-signed certificate as
-your OS allows.  SSL is required. 
+your OS allows.  SSL is required.  
+
+### Example secrets.json file
+~~~~
+{
+  "SslPassword": "<YOUR SSL CERTIFICATE PASSWORD HERE>"
+}
+~~~~
+
 
 ## OPTIONAL DEVELOPMENT SETUP
 
