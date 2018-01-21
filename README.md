@@ -35,7 +35,7 @@ If you can run integration tests and unit tests, not just version
 commands, you are all set to run the project. Use your favorite
 Git-based SCM system to contribute uploads.
 
-## SSL
+## SSL & OTHER SECRETS
 
 The SSL password must be private and never exposed to the public
 especially via github.  Follow
@@ -43,12 +43,19 @@ especially via github.  Follow
 to store the SSL password.  Create your own self-signed certificate as
 your OS allows.  SSL is required.  
 
+Use your own PayPal ID and secret from your account.
+
 ### Example secrets.json file
 ~~~~
 {
+  "pay-pal-client-id": "<clinet-id>",
+  "pay-pal-secret": "<secret>",
   "SslPassword": "<YOUR SSL CERTIFICATE PASSWORD HERE>"
 }
 ~~~~
+
+Play close attention to the use of commas and quotations if you are new to
+JSON. 
 
 
 ## OPTIONAL DEVELOPMENT SETUP
