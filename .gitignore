@@ -139,3 +139,4 @@ certificates/**
 # Visual Studio      #
 ######################
 **/.vs/*
+**/.vscode/*
